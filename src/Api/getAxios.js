@@ -26,7 +26,6 @@ export function getSearchFilms(searchFilms) {
         nameFilm: searchFilms,
     }
     const { key, nameFilm } = parameters;
-    console.log(nameFilm)
     
     return axios.get(`${url}?api_key=${key}&query=${nameFilm}&page=1`)
 };

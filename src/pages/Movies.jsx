@@ -3,50 +3,84 @@ import { useState, useEffect } from "react";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Link, useLocation, useSearchParams } from "react-router-dom";
+import { useMount } from 'react-use';
+
 
 import { getSearchFilms } from "../Api/getAxios";
+import Loader from '../components/Loader'
 
 export const Movies = () => {
-    const location = useLocation();
-    const [searchParams, setSearchParams] = useSearchParams();
-    const filmName = searchParams.get("query") ?? '';
+  const location = useLocation();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const filmName = searchParams.get("query") ?? '';
 
-    const [valueInput, setValueInput] = useState('');
-    const [searchFilms, setSearchFilms] = useState('');
-    const [arraySearch, setArraySearch] = useState([]);
+  const [query, setQuery] = useState('');
+  const [searchFilms, setSearchFilms] = useState('');
+  const [arraySearch, setArraySearch] = useState([]);
+  const [isLoading, setIsLoadings] = useState(false);
+  const [error, setError] = useState('');
 
-    const handlChange = (evt) => {
-        const  query  = evt.target.value
-        console.log(evt.target.value)
-        const nextParams = query !== "" ? { query } : {};
-        setSearchParams(nextParams)
-        setValueInput(filmName)
+
+  const handlChange = (evt) => {
+    setQuery(evt.target.value)
+    setError('')
   }
 
   const handlSubmit = (evt) => {
     evt.preventDefault()
 
-    if (valueInput.trim() === '') {
+    if (query.trim() === '') {
       toast.warn("Please, input something!")
       return
     }
 
-    setSearchFilms(valueInput)
-    }
-    
-    useEffect(() => {
-
+    const nextParams = query !== "" ? { query } : {};
+    setSearchParams(nextParams)
+    setSearchFilms(query)
+    setQuery('')
+  }
+  
+  useMount(() => {
     async function getFilm() {
       try {
-          const searchInfo = await getSearchFilms(searchFilms)
-          if (searchInfo.data.length !== 0) {
-              setArraySearch(searchInfo.data.results)
-              console.log(searchInfo)
+        const searchInfo = await getSearchFilms(filmName)
+          
+        if (searchInfo.data.results.length !== 0) {
+          setArraySearch(searchInfo.data.results)
+          setIsLoadings(false) 
           return 
-          }
+        }
+        setIsLoadings(false)
         throw new Error("Sory, no result!");
       } catch (error) {
-        // throw new Error("Sory, no result!");
+        setIsLoadings(false)
+        throw new Error("Sory, no result!");
+      }
+    }
+
+    if (filmName) {
+      setIsLoadings(true)
+      getFilm()
+    }
+  })
+    
+  useEffect(() => {
+    async function getFilm() {
+      try {
+        const searchInfo = await getSearchFilms(searchFilms)
+        if (searchInfo.data.results.length !== 0) {
+          setArraySearch(searchInfo.data.results)
+          setIsLoadings(false)
+          return 
+        }
+        setIsLoadings(false)
+        setArraySearch([])
+        throw new Error("Sory, no result!");
+      } catch (error) {
+        setIsLoadings(false)
+        setError(error)
+        setArraySearch([])
+        throw new Error("Sory, no result!");
       }
     }
 
@@ -54,39 +88,39 @@ export const Movies = () => {
       return
     }
 
-        getFilm()
-        
+    setIsLoadings(true)
+    getFilm()      
   }, [searchFilms])
 
   return (
-      <>
-        <form className="SearchForm" onSubmit={handlSubmit}>
+    <>
+      <form onSubmit={handlSubmit}>
         <input
           className="SearchForm-input"
           type="text"
-          value={filmName}
+          value={query}
           onChange={handlChange}
           autoComplete="off"
           autoFocus
           placeholder="Search images and photos"
         />
-        <button type="submit" className="SearchForm-button">
+        <button type="submit">
             Search
         </button>
-    </form>
-          <ToastContainer autoClose={3000} />
-          {arraySearch.length !==0 && <ul>
-              {arraySearch.map((film) => (
-                  <li key={film.id}>
-                      <Link to={`/movies/${film.id}`} state={{ from: location }}>
-                          <p>{film.title}</p>
-                      </Link>
-                  </li>
-              ))}
-          </ul>}
-      </>
-    
-
+      </form>
+      <ToastContainer autoClose={3000} />
+      {isLoading && <Loader />}
+      {error && <h2>{error.message}</h2>}
+      <ul>
+        {arraySearch.map((film) => (
+          <li key={film.id}>
+            <Link to={`/movies/${film.id}`} state={{ from: location }}>
+              <p>{film.title}</p>
+                </Link>
+          </li>
+        ))}
+      </ul>
+    </>
   );
 }
 
