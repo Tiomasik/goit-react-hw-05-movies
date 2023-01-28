@@ -114,7 +114,7 @@ export const Movies = () => {
       <ul>
         {arraySearch.map((film) => (
           <li key={film.id}>
-            <Link to={`/movies/${film.id}`} state={{ from: location }}>
+            <Link to={`${film.id}`} state={{ from: location }}>
               <p>{film.title}</p>
                 </Link>
           </li>
