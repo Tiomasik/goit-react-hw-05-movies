@@ -15,7 +15,8 @@ const Cast = () => {
     async function getFilm() {
       try {
         const searchActors = await getAxiosActors(movieId)
-         if (searchActors.data.cast.length !== 0) {
+        
+        if (searchActors.data.cast.length !== 0) {
           setFilmActors(searchActors.data.cast)
           setIsLoadings(false)
           return 
@@ -39,16 +40,15 @@ const Cast = () => {
       {isLoading && <Loader />}
       {error && <h2>{error.message}</h2>}
       {filmActors.length !== 0 && <ul>
-              {filmActors.map((actor) => (
-                <li key={actor.id}>
-                  {actor.profile_path && <img width={100} src={`https://image.tmdb.org/t/p/w500${actor.profile_path}`} alt="" />}
-                  {!actor.profile_path && <img width={100} src={"https://www.meme-arsenal.com/memes/fefac21eda463aa9a307c7cfdbea1bee.jpg"} alt="" />}
-                  <p>{actor.name}</p>
-                  <p>Character: {actor.character}</p>
-                  </li>
-              ))}
-          </ul>}
-
+        {filmActors.map((actor) => (
+        <li key={actor.id}>
+          {actor.profile_path && <img width={100} src={`https://image.tmdb.org/t/p/w500${actor.profile_path}`} alt="" />}
+          {!actor.profile_path && <img width={100} src={"https://www.meme-arsenal.com/memes/fefac21eda463aa9a307c7cfdbea1bee.jpg"} alt="" />}
+          <p>{actor.name}</p>
+          <p>Character: {actor.character}</p>
+        </li>
+        ))}
+      </ul>}
     </section>
   );
 };

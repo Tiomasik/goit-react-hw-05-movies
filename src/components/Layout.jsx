@@ -8,8 +8,8 @@ export const Layout = () => {
     <>
       <Header>
         <nav>
-            <Link to="/">Home</Link>
-            <Link to="/movies">Movies</Link>
+          <Link to="/">Home</Link>
+          <Link to="/movies">Movies</Link>
         </nav>
       </Header>
       <Suspense fallback={<div>Loading page...</div>}>
