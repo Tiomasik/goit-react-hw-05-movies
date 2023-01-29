@@ -46,7 +46,8 @@ const MovieInfo = () => {
         <p>Come Back</p>
       </ButtonBack>
       {filmId && <FilmInfo>
-        <img width={250} src={`https://image.tmdb.org/t/p/w500${filmId.poster_path}`} alt=""/>
+        {filmId.poster_path && <img width={250} src={`https://image.tmdb.org/t/p/w500${filmId.poster_path}`} alt="" />}
+        {!filmId.poster_path && <img width={250} src={"https://sitysun.ru/wp-content/uploads/oboi-vertikalnye-krasivye_74.jpg"} alt="" />}
         <div>
           <h2>{filmId.original_title} ({date})</h2>
           <Title>Overview</Title>
