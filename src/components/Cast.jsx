@@ -15,7 +15,6 @@ const Cast = () => {
     async function getFilm() {
       try {
         const searchActors = await getAxiosActors(movieId)
-        console.log(searchActors)
          if (searchActors.data.cast.length !== 0) {
           setFilmActors(searchActors.data.cast)
           setIsLoadings(false)
@@ -28,7 +27,7 @@ const Cast = () => {
         setIsLoadings(false)
         setError(error)
         setFilmActors([])
-        throw new Error("Sory, no result!");
+        console.log(error);
       }
     }
 

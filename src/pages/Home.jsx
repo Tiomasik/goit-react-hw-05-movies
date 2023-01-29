@@ -4,7 +4,7 @@ import { getAxiosList } from "../Api/getAxios";
 import { useMount } from 'react-use';
 
 
-export const Home = () => {
+const Home = () => {
     const location = useLocation();
     const [films, setFilms] = useState([]);
 
@@ -13,12 +13,12 @@ useMount(() => {
       try {
           const listFilm = await getAxiosList()
           if (!listFilm.data.results.length) {
-            throw new Error("Alarm!!!");
+            throw new Error("Sory, try later");
         }
        setFilms(listFilm.data.results)
           
       } catch (error) {
-        throw new Error("Sory, no result!");
+        console.log(error);
       }
     }
 
@@ -41,3 +41,5 @@ useMount(() => {
     </main>
   );
 };
+
+export default Home;

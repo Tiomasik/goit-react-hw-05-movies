@@ -9,7 +9,7 @@ import { useMount } from 'react-use';
 import { getSearchFilms } from "../Api/getAxios";
 import Loader from '../components/Loader'
 
-export const Movies = () => {
+const Movies = () => {
   const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
   const filmName = searchParams.get("query") ?? '';
@@ -54,7 +54,7 @@ export const Movies = () => {
         throw new Error("Sory, no result!");
       } catch (error) {
         setIsLoadings(false)
-        throw new Error("Sory, no result!");
+        console.log(error);
       }
     }
 
@@ -80,7 +80,7 @@ export const Movies = () => {
         setIsLoadings(false)
         setError(error)
         setArraySearch([])
-        throw new Error("Sory, no result!");
+        console.log(error);
       }
     }
 
@@ -102,7 +102,7 @@ export const Movies = () => {
           onChange={handlChange}
           autoComplete="off"
           autoFocus
-          placeholder="Search images and photos"
+          placeholder="Search films"
         />
         <button type="submit">
             Search
@@ -123,6 +123,8 @@ export const Movies = () => {
     </>
   );
 }
+
+export default Movies;
 
 // Movies.propTypes = {
 //     onSubmit: PropTypes.func.isRequired

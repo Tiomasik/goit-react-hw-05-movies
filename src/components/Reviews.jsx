@@ -16,7 +16,6 @@ const Reviews = () => {
     async function getFilm() {
       try {
         const searchReviews = await getAxiosReviews(movieId)
-        console.log(searchReviews)
          if (searchReviews.data.results.length !== 0) {
           setFilmReviews(searchReviews.data.results)
           setIsLoadings(false)
@@ -29,7 +28,7 @@ const Reviews = () => {
         setIsLoadings(false)
         setError(error)
         setFilmReviews([])
-        throw new Error("We don't have any reviews for this movie");
+        console.log(error);
       }
     }
 
@@ -38,7 +37,6 @@ const Reviews = () => {
   })
   return (
     <section>
-      {isLoading && <Loader />}
       {isLoading && <Loader />}
       {error && <h2>{error.message}</h2>}
       {filmReviews.length !== 0 && <ul>

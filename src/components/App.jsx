@@ -1,11 +1,19 @@
 import { Route, Routes } from "react-router-dom";
-
-import { Home } from "../pages/Home";
-import { Movies } from "../pages/Movies";
+import { lazy } from "react";
 import { Layout } from "./Layout";
-import { MovieInfo } from "../pages/MovieInfo";
-import Cast from "./Cast";
-import  Reviews  from "./Reviews";
+
+// import { Home } from "../pages/Home";
+// import { Movies } from "../pages/Movies";
+// import { Layout } from "./Layout";
+// import { MovieInfo } from "../pages/MovieInfo";
+// import Cast from "./Cast";
+// import Reviews from "./Reviews";
+
+const Home = lazy(() => import("../pages/Home"));
+const Movies = lazy(() => import("../pages/Movies"));
+const MovieInfo = lazy(() => import("../pages/MovieDetails"));
+const Cast = lazy(() => import("./Cast"));
+const Reviews = lazy(() => import("./Reviews"));
 
 export const App = () => {
   return (
