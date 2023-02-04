@@ -1,16 +1,23 @@
 import styled from 'styled-components';
 
 export const FormStyle = styled.form `
-    margin-left: 20px;
+    margin-left: 24px;
+    margin-bottom: 20px;
     display: flex;
     gap: 20px;
     align-items: center;
 `
 
 export const Input = styled.input `
-    width: 250px;
-    height: 30px;
-    font-size: 18px;
+    display: inline-block;
+    width: 50%;
+    font: inherit;
+    font-size: 20px;
+    border: none;
+    border-bottom: 2px solid #8e8edd;
+    outline: none;
+    padding-left: 4px;
+    padding-right: 4px;
 `
 
 export const Button = styled.button `
@@ -18,13 +25,13 @@ export const Button = styled.button `
     border-radius: 5px;
     color: black;
     font-weight: 500;
-    border: 1px solid blue;
+    border: 2px solid #8e8edd;
     background-color: transparent;
     cursor: pointer;
     font-size: 18px;
 
     :hover {
         color: white;
-        background-color: blue;
+        background-color: #8e8edd;
     }
 `

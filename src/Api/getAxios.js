@@ -49,3 +49,13 @@ export function getAxiosReviews(movieId) {
     
     return axios.get(`${url}?api_key=${key}`)
 };
+
+export function getAxiosVideo(movieId) {
+    const url = `https://api.themoviedb.org/3/movie/${movieId}/videos`;
+    const parameters = {
+        key: '866c6d075a3e37e8cd8cfb5e85076bc4',
+    }
+    const { key } = parameters;
+    
+    return axios.get(`${url}?api_key=${key}`)
+};

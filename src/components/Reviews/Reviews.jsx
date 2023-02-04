@@ -2,8 +2,8 @@ import { useParams } from "react-router-dom";
 import { useState } from "react";
 import { useMount } from 'react-use';
 
-import { getAxiosReviews } from "../Api/getAxios";
-import Loader from './Loader'
+import { getAxiosReviews } from "../../Api/getAxios";
+import Loader from '../Loader/Loader'
 import { Avtor } from './Reviews.styled'
 
 const Reviews = () => {

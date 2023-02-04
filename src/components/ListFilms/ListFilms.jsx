@@ -1,16 +1,19 @@
 import { useLocation, Link } from "react-router-dom";
 import PropTypes from 'prop-types';
 
+import { List } from "./ListFilms.styled";
+
 const ListFilms = ({ films }) => {
   const location = useLocation();
   return (
-    <ul>{films.map((film) => (
+    <List>{films.map((film) => (
       <li key={film.id}>
         <Link to={`/movies/${film.id}`} state={{ from: location }}>
-          <p>{film.title}</p>
+          {film.poster_path && <img width={250} src={`https://image.tmdb.org/t/p/w500${film.poster_path}`} alt="" />}
+          {!film.poster_path && <img width={250} src={"https://sitysun.ru/wp-content/uploads/oboi-vertikalnye-krasivye_74.jpg"} alt="" />}
         </Link>
       </li>
-    ))} </ul>
+    ))} </List>
   );
 };
 

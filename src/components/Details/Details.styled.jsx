@@ -19,7 +19,7 @@ export const ButtonBack = styled(Link) `
 
     :hover {
         color: white;
-        background-color: blue;
+        background-color: #8e8edd;
     }
 
     p {
@@ -28,13 +28,23 @@ export const ButtonBack = styled(Link) `
 `
 
 export const FilmInfo = styled.div `
+    align-items: center;
     display: flex;
+    flex-direction: column;
     gap: 20px;
     padding-bottom: 10px;
     border-bottom: 1px solid black;
 
+    @media screen and (min-width: 768px) {
+        flex-direction: row;
+    }
+
+    img {
+        width: 320px;
+    }
+
     div{
-        width: 600px;
+        max-width: 400px;
     }
 `
 
@@ -64,6 +74,6 @@ export const LinkBtn = styled(Link) `
     border-radius: 5px;
 
     :hover {
-        color: blue;
+        color: #8e8edd;
     }
 `

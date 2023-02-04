@@ -5,9 +5,9 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import { getSearchFilms } from "../Api/getAxios";
-import Loader from '../components/Loader'
-import ListFilmsSearch from '../components/ListFilmsSearch'
-import Form from "components/Form";
+import Loader from '../components/Loader/Loader'
+import ListFilmsSearch from '../components/ListFilmsSearch/ListFilmsSearch'
+import Form from "components/Form/Form";
 
 const Movies = () => {
   const [searchParams, setSearchParams] = useSearchParams();

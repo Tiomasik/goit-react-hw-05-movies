@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useMount } from 'react-use';
 
 import { getAxiosList } from "../Api/getAxios";
-import  ListFilms  from "../components/ListFilms";
+import  ListFilms  from "../components/ListFilms/ListFilms";
 
 const Home = () => {
   const [films, setFilms] = useState([]);
@@ -15,7 +15,7 @@ const Home = () => {
         if (!listFilm.data.results.length) {
           throw new Error("Sory, try later");
         }
-       
+        console.log(listFilm.data.results)
         setFilms(listFilm.data.results)
           
       } catch (error) {

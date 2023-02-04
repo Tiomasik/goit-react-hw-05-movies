@@ -1,10 +1,9 @@
-import { useParams, useLocation, Outlet } from "react-router-dom";
-import { useState, Suspense } from "react";
+import { useParams, useLocation } from "react-router-dom";
+import { useState } from "react";
 import { useMount } from 'react-use';
-import { AiFillCaretLeft } from "react-icons/ai";
 
-import { Main, ButtonBack, FilmInfo, Title, Description, List, LinkBtn } from './MovieDetails.styled'
 import { getAxiosID } from "../Api/getAxios";
+import  Details  from "../components/Details/Details";
 
 const MovieInfo = () => {
   const { movieId } = useParams();
@@ -40,37 +39,7 @@ const MovieInfo = () => {
     })
     
   return (
-    <Main>
-      <ButtonBack to={loc}>
-        <AiFillCaretLeft />
-        <p>Come Back</p>
-      </ButtonBack>
-      {filmId && <FilmInfo>
-        {filmId.poster_path && <img width={250} src={`https://image.tmdb.org/t/p/w500${filmId.poster_path}`} alt="" />}
-        {!filmId.poster_path && <img width={250} src={"https://sitysun.ru/wp-content/uploads/oboi-vertikalnye-krasivye_74.jpg"} alt="" />}
-        <div>
-          <h2>{filmId.original_title} ({date})</h2>
-          <Title>Overview</Title>
-          <Description>{filmId.overview}</Description>
-          <Title>Genres</Title>
-          <Description>{ genre }</Description>
-        </div>
-      </FilmInfo>}
-      <div>
-        <p>Additional information</p>
-        <List>
-          <li>
-            <LinkBtn to='cast' filmid={movieId}>Cast</LinkBtn>
-          </li>
-          <li>
-            <LinkBtn to="reviews" filmid={movieId}>Reviews</LinkBtn>
-          </li>
-        </List>
-      </div>
-      <Suspense >
-        <Outlet/>
-      </Suspense>
-    </Main>
+    <Details filmId={filmId} loc={loc} date={date} genre={genre}></Details>
   );
 };
 
