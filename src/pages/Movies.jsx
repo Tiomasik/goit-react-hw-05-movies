@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useMount } from 'react-use';
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import { getSearchFilms } from "../Api/getAxios";
@@ -16,13 +16,11 @@ const Movies = () => {
   const [searchFilms, setSearchFilms] = useState('');
   const [arraySearch, setArraySearch] = useState([]);
   const [isLoading, setIsLoadings] = useState(false);
-  const [error, setError] = useState('');
 
   const handlSubmit = (query) => {
     const nextParams = query !== "" ? { query } : {};
     setSearchParams(nextParams)
     setSearchFilms(query)
-    setError('')
   }
   
   useMount(() => {
@@ -37,7 +35,6 @@ const Movies = () => {
         }
 
         setIsLoadings(false)
-        throw new Error("Sory, no result!");
       } catch (error) {
         setIsLoadings(false)
         console.log(error);
@@ -63,10 +60,9 @@ const Movies = () => {
 
         setIsLoadings(false)
         setArraySearch([])
-        throw new Error("Sory, no result!");
+        throw new Error(toast.error("Sory, no result!"));
       } catch (error) {
         setIsLoadings(false)
-        setError(error)
         setArraySearch([])
         console.log(error);
       }
@@ -85,7 +81,6 @@ const Movies = () => {
       <Form onSubmit={handlSubmit}></Form>
       <ToastContainer autoClose={3000} />
       {isLoading && <Loader />}
-      {error && <h2>{error.message}</h2>}
       <ListFilmsSearch arraySearch={arraySearch}></ListFilmsSearch>
     </main>
   );

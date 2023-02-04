@@ -19,7 +19,7 @@ const Details = ({ filmId, loc, date, genre }) => {
           <h2>{filmId.original_title} ({date})</h2>
           <Title>Overview</Title>
           <Description>{filmId.overview}</Description>
-          <Title>Genres</Title>
+          {genre && <Title>Genres</Title>}
           <Description>{ genre }</Description>
         </div>
       </FilmInfo>}

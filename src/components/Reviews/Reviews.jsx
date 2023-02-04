@@ -4,7 +4,7 @@ import { useMount } from 'react-use';
 
 import { getAxiosReviews } from "../../Api/getAxios";
 import Loader from '../Loader/Loader'
-import { Avtor } from './Reviews.styled'
+import { Avtor, ErrorMes } from './Reviews.styled'
 
 const Reviews = () => {
   const { movieId } = useParams();
@@ -25,7 +25,7 @@ const Reviews = () => {
 
         setIsLoadings(false)
         setFilmReviews([])
-        throw new Error("We don't have any reviews for this movie");
+        throw new Error("Sory, we don't have any reviews for this movie :(");
       } catch (error) {
         setIsLoadings(false)
         setError(error)
@@ -40,7 +40,7 @@ const Reviews = () => {
   return (
     <section>
       {isLoading && <Loader />}
-      {error && <h2>{error.message}</h2>}
+      {error && <ErrorMes>{error.message}</ErrorMes>}
       {filmReviews.length !== 0 &&<ul>
         {filmReviews.map((review) => (
         <li key={review.id}>

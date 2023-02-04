@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 export const Main = styled.main `
     padding: 0 20px;
+   
 `
 
 export const ButtonBack = styled(Link) `

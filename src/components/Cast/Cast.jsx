@@ -4,7 +4,7 @@ import { useMount } from 'react-use';
 
 import { getAxiosActors } from "../../Api/getAxios";
 import Loader from '../Loader/Loader'
-import { List, Name, Character } from './Cast.styled'
+import { List, Name, Character, ErrorMes } from './Cast.styled'
 
 const Cast = () => {
   const { movieId } = useParams();
@@ -24,7 +24,7 @@ const Cast = () => {
          }
         setIsLoadings(false)
         setFilmActors([])
-        throw new Error("Sory, no result!");
+        throw new Error("Sory, no result :(");
       } catch (error) {
         setIsLoadings(false)
         setError(error)
@@ -39,7 +39,7 @@ const Cast = () => {
   return (
     <section>
       {isLoading && <Loader />}
-      {error && <h2>{error.message}</h2>}
+      {error && <ErrorMes>{error.message}</ErrorMes>}
       {filmActors.length !== 0 && <List>
         {filmActors.map((actor) => (
         <li key={actor.id}>

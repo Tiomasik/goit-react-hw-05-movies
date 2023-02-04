@@ -18,6 +18,7 @@ export const Input = styled.input `
     outline: none;
     padding-left: 4px;
     padding-right: 4px;
+    background-color: transparent;
 `
 
 export const Button = styled.button `

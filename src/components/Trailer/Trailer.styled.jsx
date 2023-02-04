@@ -19,3 +19,8 @@ export const Player = styled.div `
         height: 100%;
     }
 `
+
+export const ErrorMes = styled.h2 `
+    color: red;
+    font-weight: 700;
+`

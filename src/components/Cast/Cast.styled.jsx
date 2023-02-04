@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 
+
 export const List = styled.ul `
     display: grid;
     max-width: calc(100vw - 48px);
@@ -41,5 +42,10 @@ export const Name = styled.p `
    font-weight: 700;
    margin: 0;
    margin-bottom: 5px 
+`
+
+export const ErrorMes = styled.h2 `
+    color: red;
+    font-weight: 700;
 `
 

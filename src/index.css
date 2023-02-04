@@ -7,6 +7,11 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  background-image: url("https://png.pngtree.com/thumb_back/fh260/background/20210327/pngtree-colored-gradient-movie-film-texture-watercolor-background-image_595613.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 code {
